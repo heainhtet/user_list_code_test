@@ -1,0 +1,7 @@
+#include? "Flutter/Generated.xcconfig"
+#include "Flutter/Release.xcconfig"
+
+Flutter_Target=lib/main_prod.dart
+ASSET_PREFIX=prod
+PRODUCT_BUNDLE_IDENTIFIER=com.example.acePlusCodeTest
+APP_DISPLAY_NAME=Code Test

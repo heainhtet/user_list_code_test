@@ -1,0 +1,38 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '13.0'
+
+
+project 'Runner', {
+  # Base configs
+  'Debug' => :debug,
+  'Profile' => :release,
+  'Release' => :release,
+
+  # Dev flavor configs
+  'Debug_dev' => :debug,
+  'Profile_dev' => :release,
+  'Release_dev' => :release,
+
+  # Staging flavor configs
+  'Debug_staging' => :debug,
+  'Profile_staging' => :release,
+  'Release_staging' => :release,
+
+  # Prod flavor configs
+  'Debug_prod' => :debug,
+  'Profile_prod' => :release,
+  'Release_prod' => :release,
+}
+
+target 'Runner' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for Runner
+
+  target 'RunnerTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end

@@ -1,0 +1,7 @@
+#include? "Flutter/Generated.xcconfig"
+#include "Flutter/Debug.xcconfig"
+
+Flutter_Target=lib/main_dev.dart
+ASSET_PREFIX=dev
+PRODUCT_BUNDLE_IDENTIFIER=com.example.acePlusCodeTest.dev
+APP_DISPLAY_NAME=Code Test (Dev)
