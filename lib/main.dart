@@ -1,4 +1,5 @@
 import 'package:ace_plus_code_test/core/theme/theme_mode_notifier.dart';
+import 'package:ace_plus_code_test/features/user/presentation/screens/user_list_screen.dart';
 import 'package:ace_plus_code_test/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,6 +21,6 @@ class CodeTest extends ConsumerWidget {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: themeMode,
-      home: HomePage());
+      home: UserListScreen());
   }
 }

@@ -10,7 +10,9 @@ class HomePage extends ConsumerWidget {
     final themeMode = ref.watch(themeModeProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Theme Example')),
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text('User List')),
       body: SwitchListTile(
         title: const Text('Dark Mode'),
         value: themeMode == ThemeMode.dark,

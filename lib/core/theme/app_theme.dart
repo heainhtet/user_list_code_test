@@ -3,30 +3,31 @@ import 'package:flutter/material.dart';
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
-    primaryColor: Colors.blue,
-    scaffoldBackgroundColor: Colors.white,
-    appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.blue,
-      foregroundColor: Colors.white,
+    colorScheme: ColorScheme.light(
+      surface: Colors.grey.shade300,
+      primary: Colors.grey.shade200,
+      secondary: Colors.grey.shade400,
+      tertiary: Colors.grey.shade800,
+      inversePrimary: Colors.grey.shade600,
     ),
-    colorScheme: ColorScheme.fromSeed(
-      seedColor: Colors.blue,
-      brightness: Brightness.light,
+    textTheme: ThemeData.light().textTheme.apply(
+      bodyColor: Colors.grey[800],
+      displayColor: Colors.black,
     ),
     useMaterial3: true,
   );
 
   static ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
-    primaryColor: Colors.blue,
-    scaffoldBackgroundColor: Colors.black,
-    appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.black,
-      foregroundColor: Colors.white,
+    colorScheme: ColorScheme.dark(
+      surface: Colors.grey.shade900,
+      primary: Colors.grey.shade800,
+      secondary: Colors.grey.shade700,
+      inversePrimary: Colors.grey.shade300,
     ),
-    colorScheme: ColorScheme.fromSeed(
-      seedColor: Colors.blue,
-      brightness: Brightness.dark,
+    textTheme: ThemeData.dark().textTheme.apply(
+      bodyColor: Colors.grey[300],
+      displayColor: Colors.white,
     ),
     useMaterial3: true,
   );
