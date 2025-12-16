@@ -7,54 +7,32 @@ class AppTheme {
     useMaterial3: true,
     brightness: Brightness.light,
 
-    colorScheme: ColorScheme.light(
-      primary: AppColors.primary,
-      secondary: AppColors.secondary,
-      surface: Colors.white,
-      onPrimary: Colors.white,
-      onSecondary: Colors.white,
-      onSurface: AppColors.textPrimary,
+     colorScheme: ColorScheme.light(
+      primary: AppColors.primary,           // dark blue
+      secondary: AppColors.secondary,       // lighter blue
+      surface: Colors.white,                 // white background
+      onPrimary: Colors.white,               // text/icons on primary (dark blue) -> white
+      onSecondary: Colors.white,             // text/icons on secondary (blue) -> white
+      onSurface: Colors.black,               // text/icons on white surface -> black
     ),
 
-    appBarTheme: AppBarTheme(
-      backgroundColor: Colors.white,
-      foregroundColor: AppColors.primary,
-      elevation: 0,
-      centerTitle: true,
-      iconTheme: IconThemeData(color: AppColors.primary),
-      titleTextStyle: TextStyle(
-        fontSize: Dimens.f20,
-        fontWeight: FontWeight.bold,
-        color: AppColors.primary,
-      ),
-    ),
-
-    textTheme: TextTheme(
-      bodyMedium: TextStyle(fontSize: Dimens.f14, color: AppColors.textPrimary),
-      titleMedium: TextStyle(
-        fontSize: Dimens.f16,
-        fontWeight: FontWeight.bold,
-        color: AppColors.textPrimary,
-      ),
-    ),
-
-    inputDecorationTheme: InputDecorationTheme(
-      prefixIconColor: AppColors.primary,
-      labelStyle: const TextStyle(
-        color: AppColors.textPrimary,
-        fontWeight: FontWeight.bold,
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderSide: const BorderSide(color: AppColors.primary, width: 2),
-        borderRadius: BorderRadius.circular(Dimens.r80),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderSide: const BorderSide(color: AppColors.primary, width: 2),
-        borderRadius: BorderRadius.circular(Dimens.r80),
-      ),
-    ),
-
-    dividerTheme: const DividerThemeData(color: AppColors.border, thickness: 1),
+    
+//    appBarTheme: AppBarTheme(
+//   backgroundColor: Colors.white,
+//   foregroundColor: AppColors.primary,
+//   elevation: 0,
+//   iconTheme: IconThemeData(color: AppColors.primary),
+//   // titleTextStyle: TextStyle(
+//   //   fontSize: Dimens.f20,
+//   //   fontWeight: FontWeight.bold,
+//   //   color: AppColors.primary,
+//   // ),
+//   toolbarTextStyle: TextStyle( // add this, usually same as titleTextStyle
+//     fontSize: Dimens.f20,
+//     fontWeight: FontWeight.bold,
+//     color: AppColors.primary,
+//   ),
+// ),
   );
 
   static ThemeData darkTheme = ThemeData(
@@ -70,16 +48,21 @@ class AppTheme {
       onSurface: Colors.white,
     ),
 
-    appBarTheme: AppBarTheme(
-      backgroundColor: Colors.black,
-      foregroundColor: Colors.white,
-      elevation: 0,
-      iconTheme: IconThemeData(color: Colors.white),
-      titleTextStyle: TextStyle(
-        fontSize: Dimens.f20,
-        fontWeight: FontWeight.bold,
-        color: Colors.white,
-      ),
-    ),
+//     appBarTheme: AppBarTheme(
+//   backgroundColor: Colors.black,
+//   iconTheme: IconThemeData(color: Colors.white),
+//   // titleTextStyle: TextStyle(
+//   //   fontSize: Dimens.f20,
+//   //   fontWeight: FontWeight.bold,
+//   //   color: Colors.white,
+//   // ),
+//   toolbarTextStyle: TextStyle(
+//     fontSize: Dimens.f20,
+//     fontWeight: FontWeight.bold,
+//     color: Colors.white,
+//   ),
+//   elevation: 0,
+// ),
+
   );
 }

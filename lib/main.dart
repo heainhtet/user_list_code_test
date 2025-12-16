@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/theme/app_theme.dart';
 
 void main() {
+
   runApp( ProviderScope(child: CodeTest()));
 }
 

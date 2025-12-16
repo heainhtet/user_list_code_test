@@ -28,9 +28,8 @@ class UsrListTile extends StatelessWidget {
           children: [
             Text(
               user.name,
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: Theme.of(context).colorScheme.secondary,
-              ),
+                            style: Theme.of(context).textTheme.titleMedium,
+
             ),
             Text(user.email, style: Theme.of(context).textTheme.bodyMedium),
             Text(user.phone, style: Theme.of(context).textTheme.bodyMedium),
