@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../core/app_size/dimens.dart';
 import '../../../../core/theme/theme_mode_notifier.dart';
 import '../providers/user_providers.dart';
 import '../widgets/user_list_tile.dart';
@@ -97,7 +98,8 @@ class UserListScreen extends ConsumerWidget {
                     );
                   },
                   loading: () => Center(child: CircularProgressIndicator()),
-                  error: (error, stack) => Center(child: Text('Error: $error')),
+                  error: (error, stack) =>
+                      Center(child: ErrorsWidget(error: error.toString())),
                 ),
               ),
             ],
@@ -106,11 +108,44 @@ class UserListScreen extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          ref
-              .read(userListProvider.notifier)
-              .refresh(); // Trigger data fetch
+          ref.read(userListProvider.notifier).refresh(); // Trigger data fetch
         },
         child: Text("Fetch"),
+      ),
+    );
+  }
+}
+
+class ErrorsWidget extends StatelessWidget {
+  const ErrorsWidget({super.key, required this.error});
+
+  final String error;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: Dimens.w16,
+              vertical: Dimens.h4,
+            ),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.secondary,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Text(
+              error,
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 3,
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+          ),
+        ],
       ),
     );
   }

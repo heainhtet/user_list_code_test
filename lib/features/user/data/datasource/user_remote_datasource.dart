@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import '../../../../flavor_config.dart';
 import '../model/user_model.dart';
@@ -16,29 +18,37 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
   @override
   Future<List<UserModel>> getUsers() async {
-    final response = await client.get(
-      Uri.parse('$baseUrl/users'),
-      headers: {
-        // mimic browser User-Agent to prevent access denied 
-        'User-Agent': 'Mozilla/5.0 (Flutter App)', 
-        'Accept': 'application/json',
-      },
-    );
+    try {
+      final response = await client
+          .get(
+            Uri.parse('$baseUrl/users'),
+            headers: {
+              'User-Agent': 'Mozilla/5.0 (Flutter App)',
+              'Accept': 'application/json',
+            },
+          )
+          .timeout(const Duration(seconds: 15));
 
-    if (response.statusCode == 200) {
-      final List<dynamic> data = json.decode(response.body);
-
-      return data.map((json) => UserModel.fromJson(json)).toList();
-    } else if (response.statusCode == 403) {
-      // Handle Forbidden error
-      throw Exception(
-        'Access denied (403 Forbidden). You don\'t have permission to access this resource.',
-      );
-    } else if (response.statusCode == 404) {
-      // Handle Not Found
-      throw Exception('Resource not found (404).');
-    } else {
-      throw Exception('Failed to load users');
+      if (response.statusCode == 200) {
+        final List<dynamic> data = json.decode(response.body);
+        return data.map((e) => UserModel.fromJson(e)).toList();
+      } else if (response.statusCode == 403) {
+        throw Exception('Access denied (403 Forbidden)');
+      } else if (response.statusCode == 404) {
+        throw Exception('Resource not found (404)');
+      } else {
+        throw Exception('Server error (${response.statusCode})');
+      }
+    } on SocketException {
+      throw Exception('No internet connection or server is unreachable.');
+    } on HttpException {
+      throw Exception('HTTP error occurred.');
+    } on http.ClientException catch (e) {
+      throw Exception('Network error: ${e.message}');
+    } on TimeoutException {
+      throw Exception('Connection timeout. Please try again.');
+    } catch (e) {
+      throw Exception('Unexpected error: $e');
     }
   }
 }
