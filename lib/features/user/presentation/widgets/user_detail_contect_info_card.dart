@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../core/app_size/dimens.dart';
 import '../../domain/entities/user.dart';
 
 class UserDetailContectInfoCard extends StatelessWidget {
@@ -19,120 +20,119 @@ class UserDetailContectInfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      spacing: 8,
+      spacing: Dimens.h8,
       children: [
         Text(
           'Contact Informations',
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-            // color: Color(0xFF1A3D63),
-          ),
+          style: Theme.of(context).textTheme.titleMedium,
         ),
-    
+
         Container(
           width: MediaQuery.of(context).size.width,
-          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+          padding: EdgeInsets.symmetric(
+            vertical: Dimens.h20,
+            horizontal: Dimens.w16,
+          ),
           decoration: BoxDecoration(
-            color: Color(0xFF4A7FA7),
-            borderRadius: BorderRadius.circular(8),
+            color: Theme.of(context).colorScheme.secondary,
+            borderRadius: BorderRadius.circular(Dimens.radiusSmall),
           ),
           child: Column(
+            spacing: Dimens.h4,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               RichText(
                 text: TextSpan(
                   style: const TextStyle(color: Colors.white),
                   children: [
-                    const TextSpan(
+                    TextSpan(
                       text: 'Email: ',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                        color: Colors.black,
+                        fontSize: Dimens.f14,
+                        color: Theme.of(context).colorScheme.onSecondary,
                       ),
                     ),
                     TextSpan(
                       text: user.email,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                        color: Colors.white,
+                        fontSize: Dimens.f14,
+                        color: Theme.of(context).colorScheme.onSecondary,
                       ),
                     ),
                   ],
                 ),
               ),
-    
+
               RichText(
                 text: TextSpan(
                   style: const TextStyle(color: Colors.white),
                   children: [
-                    const TextSpan(
+                    TextSpan(
                       text: 'Username: ',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                        color: Colors.black,
+                        fontSize: Dimens.f14,
+                        color: Theme.of(context).colorScheme.onSecondary,
                       ),
                     ),
                     TextSpan(
                       text: user.username,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                        color: Colors.white,
+                        fontSize: Dimens.f14,
+                        color: Theme.of(context).colorScheme.onSecondary,
                       ),
                     ),
                   ],
                 ),
               ),
-    
+
               RichText(
                 text: TextSpan(
                   style: const TextStyle(color: Colors.white),
                   children: [
-                    const TextSpan(
+                    TextSpan(
                       text: 'Phone: ',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                        color: Colors.black,
+                        fontSize: Dimens.f14,
+                        color: Theme.of(context).colorScheme.onSecondary,
                       ),
                     ),
                     TextSpan(
                       text: user.phone,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                        color: Colors.white,
+                        fontSize: Dimens.f14,
+                        color: Theme.of(context).colorScheme.onSecondary,
                       ),
                     ),
                   ],
                 ),
               ),
-    
+
               RichText(
                 text: TextSpan(
                   style: Theme.of(context).textTheme.bodyMedium,
                   children: [
-                    const TextSpan(
+                    TextSpan(
                       text: 'Website: ',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                        color: Colors.black,
+                        fontSize: Dimens.f14,
+                        color: Theme.of(context).colorScheme.onSecondary,
                       ),
                     ),
                     TextSpan(
                       text: user.website,
                       style: TextStyle(
-                        color: Colors.blue,
+                        color: Theme.of(context).colorScheme.primary,
                         decoration: TextDecoration.underline,
-    
                         fontWeight: FontWeight.bold,
                       ),
+
                       recognizer: TapGestureRecognizer()
                         ..onTap = () => _launchURL(user.website),
                     ),

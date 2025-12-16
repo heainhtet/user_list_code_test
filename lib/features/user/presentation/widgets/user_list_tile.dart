@@ -1,6 +1,5 @@
-
 import 'package:flutter/material.dart';
-
+import '../../../../core/app_size/dimens.dart';
 import '../../domain/entities/user.dart';
 
 class UsrListTile extends StatelessWidget {
@@ -13,40 +12,28 @@ class UsrListTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-        margin: EdgeInsets.only(bottom: 12),
+        padding: EdgeInsets.symmetric(vertical: Dimens.w12, horizontal: Dimens.h12),
+        margin: EdgeInsets.only(bottom: Dimens.mH12),
         decoration: BoxDecoration(
-          border: Border.all(color: Color(0xFF1A3D63), width: 2),
-          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: Theme.of(context).colorScheme.primary,
+            width: 2,
+          ),
+          borderRadius: BorderRadius.circular(Dimens.radiusSmall),
         ),
         child: Column(
+          spacing: Dimens.h2,
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
               user.name,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF4A7FA7),
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                color: Theme.of(context).colorScheme.secondary,
               ),
             ),
-            Text(
-              user.email,
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
-            Text(
-              user.phone,
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
+            Text(user.email, style: Theme.of(context).textTheme.bodyMedium),
+            Text(user.phone, style: Theme.of(context).textTheme.bodyMedium),
           ],
         ),
       ),

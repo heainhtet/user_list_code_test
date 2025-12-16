@@ -1,4 +1,4 @@
-// presentation/screens/user_list_screen.dart
+import 'package:ace_plus_code_test/features/user/presentation/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/theme/theme_mode_notifier.dart';
@@ -17,45 +17,30 @@ class UserListScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        iconTheme: const IconThemeData(
-          color: Color(0xFF1A3D63), // menu icon color
-        ),
         centerTitle: true,
-        title: const Text(
+        title: Text(
           'User List',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: Color(0xFF1A3D63),
-          ),
+          style: Theme.of(context).appBarTheme.titleTextStyle,
         ),
-      ),
-      drawer: SafeArea(
-        child: Drawer(
-          child: Row(
-            spacing: 12,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Dark Mode",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF4A7FA7),
-                ),
-              ),
-              Switch(
-                value: themeMode == ThemeMode.dark,
-                onChanged: (value) {
-                  ref
-                      .read(themeModeProvider.notifier)
-                      .setTheme(value ? ThemeMode.dark : ThemeMode.light);
-                },
-              ),
-            ],
+        actions: [
+          IconButton(
+            tooltip: 'Toggle theme',
+            icon: Icon(
+              themeMode == ThemeMode.dark ? Icons.light_mode : Icons.dark_mode,
+            ),
+            onPressed: () {
+              ref
+                  .read(themeModeProvider.notifier)
+                  .setTheme(
+                    themeMode == ThemeMode.dark
+                        ? ThemeMode.light
+                        : ThemeMode.dark,
+                  );
+            },
           ),
-        ),
+        ],
       ),
+
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24),
@@ -63,28 +48,16 @@ class UserListScreen extends ConsumerWidget {
             spacing: 20,
             children: [
               TextField(
-                cursorColor: Color(0xFF4A7FA7),
+                cursorColor: Theme.of(context).colorScheme.primary,
 
                 decoration: InputDecoration(
                   labelText: 'Search by name',
 
-                  labelStyle: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                  ),
                   prefixIcon: Icon(Icons.search_rounded),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(80),
                   ),
                   enabled: true,
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xFF1A3D63), width: 2),
-                    borderRadius: BorderRadius.circular(80),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xFF1A3D63), width: 2),
-                    borderRadius: BorderRadius.circular(80),
-                  ),
                 ),
 
                 onChanged: (value) =>
@@ -101,7 +74,8 @@ class UserListScreen extends ConsumerWidget {
 
                     return RefreshIndicator(
                       onRefresh: () async {
-                        ref.refresh(userListProvider);
+                        // ref.refresh(userListProvider.future);
+                        await ref.read(userListProvider.notifier).refresh();
                       },
                       child: ListView.builder(
                         itemCount: filteredUsers.length,
@@ -123,8 +97,7 @@ class UserListScreen extends ConsumerWidget {
                       ),
                     );
                   },
-                  loading: () =>
-                      const Center(child: CircularProgressIndicator()),
+                  loading: () => LoadingWidget(),
                   error: (error, stack) => Center(child: Text('Error: $error')),
                 ),
               ),

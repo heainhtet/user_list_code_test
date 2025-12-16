@@ -1,4 +1,3 @@
-// presentation/providers/user_providers.dart
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import '../../data/datasource/user_remote_datasource.dart';
@@ -24,9 +23,25 @@ final getUsersUseCaseProvider = Provider<GetUsers>((ref) {
   return GetUsers(repository);
 });
 
-final userListProvider = FutureProvider<List<User>>((ref) async {
-  final getUsers = ref.read(getUsersUseCaseProvider);
-  return getUsers();
-});
-
 final userSearchQueryProvider = StateProvider<String>((ref) => '');
+
+class UserListNotifier extends AsyncNotifier<List<User>> {
+  @override
+  Future<List<User>> build() async {
+    return _fetchUsers();
+  }
+
+  Future<void> refresh() async {
+    state = const AsyncValue.loading();
+    state = await AsyncValue.guard(_fetchUsers);
+  }
+
+  Future<List<User>> _fetchUsers() async {
+    final repository = ref.read(userRepositoryProvider);
+    return repository.getUsers();
+  }
+}
+
+final userListProvider = AsyncNotifierProvider<UserListNotifier, List<User>>(
+  UserListNotifier.new,
+);
