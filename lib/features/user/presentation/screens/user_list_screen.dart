@@ -1,4 +1,3 @@
-import 'package:ace_plus_code_test/features/user/presentation/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/theme/theme_mode_notifier.dart';
@@ -97,13 +96,21 @@ class UserListScreen extends ConsumerWidget {
                       ),
                     );
                   },
-                  loading: () => LoadingWidget(),
+                  loading: () => Center(child: CircularProgressIndicator()),
                   error: (error, stack) => Center(child: Text('Error: $error')),
                 ),
               ),
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          ref
+              .read(userListProvider.notifier)
+              .refresh(); // Trigger data fetch
+        },
+        child: Text("Fetch"),
       ),
     );
   }
