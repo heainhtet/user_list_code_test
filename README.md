@@ -26,6 +26,8 @@ The app supports **three flavors**: `dev`, `staging`, and `prod`, each with its 
 ## How to Run the App
 
 Run the app on a connected device or emulator by specifying the flavor and entry point:
+Please use VPN. 
+Due to restrictions imposed by the Myanmar government, or potential regional limitations of the API provider, the app’s API calls may not work properly without using a VPN. To ensure full functionality during testing or usage, please use a VPN set to a supported region.
 
 ```bash
 flutter run --flavor dev -t lib/main_dev.dart
