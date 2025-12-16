@@ -25,9 +25,32 @@ final getUsersUseCaseProvider = Provider<GetUsers>((ref) {
 
 final userSearchQueryProvider = StateProvider<String>((ref) => '');
 
+// class UserListNotifier extends AsyncNotifier<List<User>> {
+//   @override
+//   Future<List<User>> build() async {
+//     return _fetchUsers();
+//   }
+
+//   Future<void> refresh() async {
+//     state = const AsyncValue.loading();
+//     state = await AsyncValue.guard(_fetchUsers);
+//   }
+
+//   Future<List<User>> _fetchUsers() async {
+//     final repository = ref.read(userRepositoryProvider);
+//     return repository.getUsers();
+//   }
+// }
+
+// final userListProvider = AsyncNotifierProvider<UserListNotifier, List<User>>(
+//   UserListNotifier.new,
+// );
 class UserListNotifier extends AsyncNotifier<List<User>> {
   @override
   Future<List<User>> build() async {
+    // Keep provider alive so it won't reset on theme changes
+    ref.keepAlive();
+
     return _fetchUsers();
   }
 

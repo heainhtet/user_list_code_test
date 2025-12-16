@@ -9,20 +9,6 @@ void main() {
   runApp( ProviderScope(child: CodeTest()));
 }
 
-// class CodeTest extends ConsumerWidget {
-//   const CodeTest({super.key});
-
-//   @override
-//   Widget build(BuildContext context,WidgetRef ref) {
-//     final themeMode = ref.watch(themeModeProvider);
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       theme: AppTheme.lightTheme,
-//       darkTheme: AppTheme.darkTheme,
-//       themeMode: themeMode,
-//       home: UserListScreen());
-//   }
-// }
 
 class CodeTest extends ConsumerWidget {
   const CodeTest({super.key});
